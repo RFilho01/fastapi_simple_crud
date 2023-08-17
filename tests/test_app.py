@@ -31,8 +31,32 @@ def test_get_users(client: TestClient):
 
     assert response.status_code == 200
     assert response.json() == {
-        'username': 'roberto',
-        'email': 'roberto@teste.com',
-        'id': 1,
+        'users': [
+            {'id': 1, 'username': 'roberto', 'email': 'roberto@teste.com'}
+        ]
     }
-    
+
+
+def test_update_user(client: TestClient):
+    response = client.put(
+        '/users/1',
+        json={
+            'username': 'name updated',
+            'email': 'email@updated.com',
+            'password': 'password_updated',
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json() == {
+        'id': 1,
+        'username': 'name updated',
+        'email': 'email@updated.com',
+    }
+
+
+def test_delete_user(client: TestClient):
+    response = client.delete('users/1')
+
+    assert response.status_code == 200
+    assert response.json() == {'detail': 'User deleted'}
