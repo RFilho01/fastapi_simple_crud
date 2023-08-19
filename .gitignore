@@ -177,3 +177,7 @@ pyrightconfig.json
 
 # Generated using ignr.py - github.com/Antrikshy/ignr.py
 
+database.db
+.ruff_cache
+.pytest_cache
+.DS_Store
